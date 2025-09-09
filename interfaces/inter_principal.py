@@ -11,20 +11,16 @@ class Inter_Principal():
         self.master.title("Calculadora")
         self.master.geometry("450x550")
         self.master.configure(bg=cor_fundo)
-        self.historico = historico  # salvar histórico durante o uso
+        self.historico = historico 
         
         
-        # adaptando tamanho, layout responsivo
-        for linha in range(5):  # == range(0, 5)
+        for linha in range(5):  
             self.master.grid_rowconfigure(linha, weight=1)
         
-        for coluna in range(4): # 0 1 2 3 
+        for coluna in range(4):  
             self.master.grid_columnconfigure(coluna, weight=1)
         
         
-        # row/column: onde começa
-        # comlumnspan: quantos colunas pode ocupar, ideal para elementos maiores
-        # sticky: onde vai se prender quando aumentar resolução, nsew se prende a tudo
         frame_visor = tk.Frame(master, bg=cor_fundo)
         frame_visor.grid(
             row=0, 
@@ -44,7 +40,7 @@ class Inter_Principal():
             relief="solid",
             justify="right"
         )
-        # ipady: espaçamento interno, aumenta elemento
+        
         self.visor.grid(
             row=0, 
             column=0, 
@@ -65,9 +61,6 @@ class Inter_Principal():
             ['1', '2', '3', '+'],
             ['0', '00', '.', '=']
         ]
-        
-        # enumerate foi usado pois ele já vem como se fosse um rank
-        # ex: 1 C, 2 DEL, ...
         
         for linha_index, linha in enumerate(botoes):
             for coluna_index, texto in enumerate(linha):
@@ -107,10 +100,6 @@ class Inter_Principal():
             pady=5,
             ipady=5
         )
-        
-    # eval: transforma string em expressão Python e calcula
-    # visor.delete(inicio, fim)
-    # visor.insert(posição, texto) 
     
     def clickar(self, valor):
         if valor == "=":
@@ -132,7 +121,7 @@ class Inter_Principal():
         elif valor == "DEL":
             expressao = self.visor.get()
             self.visor.delete(0, tk.END)
-            self.visor.insert(0, expressao[:-1])  # apaga último caractere
+            self.visor.insert(0, expressao[:-1]) 
             
         elif valor == "+/-":
             expressao = self.visor.get()
@@ -153,14 +142,6 @@ class Inter_Principal():
             
         else:
             self.visor.insert(tk.END, valor)
-            
-    
-    # def teclado(self, event):
-    #     tecla = event.char
-        
-    #     if tecla.isdigit() or tecla in "+-*/().%":
-    #         self.clickar(tecla)        
-    
             
     def janela_historico(self):
         Inter_Historico()
